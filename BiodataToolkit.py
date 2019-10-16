@@ -2,6 +2,7 @@
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 import time
+import xlsxwriter
 
 #Var definitions
 globalcount=0    
@@ -9,8 +10,6 @@ cdsList=[]
 fullFastas={'Complete Fasta':[]}
 renamedFastas={'Renamed Fastas':[]}
 init = False
-
-start = time.time()
 
 #We define the class to define the data estructure that we are going to use.
 class DataSet:
@@ -55,11 +54,12 @@ def createNewName(country,sequence,segment,counter):
             else:
                 newName=newName+str(segment)+'XX'
                 break
-    newName=newName+str(counter)
+    newName=newName+str(counter)+'\n'
     return newName
 
 
-def parser(filename,fileformat):
+def parser(filename,fileformat,outFile):
+    start = time.time()
     #We read the sequence genbank file
     for seq_record in SeqIO.parse("segment4_2017_all.gb", "genbank"):
         
@@ -116,6 +116,49 @@ def parser(filename,fileformat):
                                     dataSet.data[y].append(feature.qualifiers[y][0])
                                 else:
                                     dataSet.data[y].append('empty')
+        #We pull the country for the rename process
+        tempCountry=dataSet.data['country'][-1]
+        if ':' in tempCountry:
+            tempCountry=tempCountry[0:tempCountry.index(':')]
+        #We pull the segment for the rename process
+        tempSegment=dataSet.data['segment'][-1]
+        #We rename the sequence according to GCL nomenclature
+        nombre = createNewName(tempCountry,myseq,tempSegment,globalcount)
+        #nombre = nombre +'\n' se implementa en la función new name
+        #print ('new name :',nombre)
+        fasta_format_string = nombre + myseq2
+        renamedFastas['Renamed Fastas'].append(fasta_format_string)
+        globalcount = globalcount+1
+
+
+    end = time.time()
+    for i in dataSet.data.keys():
+        print(i,' = ',len(dataSet.data[i]))
+
+    #Now we pack everything in a new excel table
+
+    workbook = xlsxwriter.Workbook(outFile)
+    # workbook = xlsxwriter.Workbook('Segment_4_2017_all_renamed_final.xlsx') ORIGINAL
+    worksheet = workbook.add_worksheet()
+    #Input dicts
+    inputList=[dataSet.data]
+    for i in cdsList:
+        inputList.append(i.data)
+    inputList.append(fullFastas)
+    inputList.append(renamedFastas)
+    #print (inputList)
+
+    row = 0
+    col = 0
+
+    for dicc in inputList:
+        print (dicc.keys())
+        for head in dicc.keys():
+            worksheet.write(row,col,head)
+            worksheet.write_column(row+1,col,dicc[head])
+            col += 1
+
+    workbook.close()                            
 
                             
 

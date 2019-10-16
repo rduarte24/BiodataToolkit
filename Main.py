@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.messagebox
+import BiodataToolkit as bdtk
 
 root=tk.Tk()
 #Here it goes the window title
@@ -17,7 +18,7 @@ root.geometry('%dx%d+%d+%d' % (width,height,x_coordinate,y_coordinate))
 root.resizable(0,0)
 
 #This was supposed to insert an icon in the windows title
-#root.iconbitmap(r'Media/logo2.ico')
+#root.iconbitmap(r'Media/bioinformatics.png')
 
 #logo = tk.PhotoImage(file='/Users/rduarte/Documents/Projects/GCL/Biodata Toolkit GUI/logo.ico')
 #root.tk.call('wm', 'iconphoto', root._w, logo)
@@ -54,10 +55,12 @@ helpmenu = tk.Menu(menuBar, tearoff=0)
 helpmenu.add_command(label="About", command=about_us)
 menuBar.add_cascade(label="Help", menu=helpmenu)
 
-
+#Backgroud definition
+photo = tk.PhotoImage(file='Media/Background_es.png')
+labelphoto = tk.Label(root,image=photo)
+labelphoto.pack()  
 
 
 
 
 root.mainloop()
-
