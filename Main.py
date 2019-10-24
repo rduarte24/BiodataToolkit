@@ -60,6 +60,10 @@ photo = tk.PhotoImage(file='Media/Background_es.png')
 labelphoto = tk.Label(root,image=photo)
 labelphoto.pack()  
 
+#Run Button def
+btn = tk.Button(root, text='RUN',height=2, width=20, command=test_function)
+btn.pack()
+btn.place(x=200, y=310)
 
 
 
