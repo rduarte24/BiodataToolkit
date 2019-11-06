@@ -1,6 +1,13 @@
 import tkinter as tk
+from tkinter import filedialog
+from tkinter import simpledialog
 import tkinter.messagebox
 import BiodataToolkit as bdtk
+
+inputFile = ''
+outputFilename = ''
+outputRoute = ''
+
 
 root=tk.Tk()
 #Here it goes the window title
@@ -31,9 +38,27 @@ root.config(menu=menuBar)
 #Functions asociated to the next menu section
 def test_function():
     print('this is the test')
+
+def defOutName():
+    global outputFilename
+    outputFilename=simpledialog.askstring('Digita el nombre del archivo de salida','Outputfilename')
+    print(outputFilename)
+
+def defOutRoute():
+    global outputRoute
+    outputRoute=filedialog.askdirectory(title='Selecciona la carpeta de Salida')
+    print(outputRoute)
+    defOutName()
+
+def abrirArchivo():
+    global inputFile
+    inputFile = filedialog.askopenfilename(title='Selecciona el archivo de entrada.',filetypes=[('GenBank file','*.gb')])
+    print(inputFile)
+    defOutRoute()
+
 # create a pulldown menu, and add it to the menu bar
 filemenu = tk.Menu(menuBar, tearoff=0)
-filemenu.add_command(label="Open", command=test_function())
+filemenu.add_command(label="Abrir", command=abrirArchivo)
 filemenu.add_command(label="Save")
 filemenu.add_separator()
 filemenu.add_command(label="Exit", command=root.quit)
