@@ -3,6 +3,7 @@ from tkinter import filedialog
 from tkinter import simpledialog
 import tkinter.messagebox
 import BiodataToolkit as bdtk
+import Sequence_decoder as seqdeco
 
 inputFile = ''
 outputFilename = ''
@@ -66,11 +67,11 @@ menuBar.add_cascade(label="File", menu=filemenu)
 
 #Functions asociated to the next menu section
 # Menu Definition
-editmenu = tk.Menu(menuBar, tearoff=0)
-editmenu.add_command(label="Cut")
-editmenu.add_command(label="Copy")
-editmenu.add_command(label="Paste")
-menuBar.add_cascade(label="Edit", menu=editmenu)
+decodermenu = tk.Menu(menuBar, tearoff=0)
+decodermenu.add_command(label="Cargar sequencia")
+decodermenu.add_command(label="Cargar archivo de secuencias")
+#editmenu.add_command(label="Paste")
+menuBar.add_cascade(label="Sequence Decoder", menu=decodermenu)
 
 #Functions asociated to the next menu section
 def about_us():
