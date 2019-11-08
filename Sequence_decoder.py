@@ -1,0 +1,74 @@
+import xlsxwriter
+# code={'B':['C','G','T'],'D':['A','G','T'],'H':['A','C','T'],'K':['G','T'],'M':['A','C'],'N':['A','C','T','G'],'R':['A','G'],'S':['C','G'],'V':['A','C','G'],'W':['A','T'],'Y':['C','T']}
+# normal=['A','C','T','G']
+# alternative=['B','D','H','K','M','N','R','S','V','W','Y']
+# outsequences=['']
+# tempsequences=[]
+
+# class CodedSequence:
+#     #We define parameters
+
+#     seq=''
+#     #parent=CodedSequence
+#     sons=[]
+    
+#     #Definition of the constructor method
+#     def __init__(self,seq,parent,sons):
+#         seq=seq
+#         parent=parent
+#         if sons != None:
+#             sons.append(sons)
+    
+#     #Add a son method
+#     def addSon(self,sons:list):
+#         for i in sons:
+#             sons.append(i)
+    
+#     #Get sons method
+#     def getSons(self):
+#         if len(sons)>0:
+#             return sons
+#         else:
+#            return self
+
+#replace character in seq function
+# def replaceChar(seq,pos,base):
+#     return seq[:pos]+base+seq[pos+1:]
+
+
+
+#Main Function
+def sequenceDecoder(seq):
+    code={'B':['C','G','T'],'D':['A','G','T'],'H':['A','C','T'],'K':['G','T'],'M':['A','C'],'N':['A','C','T','G'],'R':['A','G'],'S':['C','G'],'V':['A','C','G'],'W':['A','T'],'Y':['C','T']}
+    normal=['A','C','T','G']
+    alternative=['B','D','H','K','M','N','R','S','V','W','Y']
+    outsequences=['']
+    tempsequences=[]
+    for z in seq:
+        #We verify nucleotide
+        if z in normal:
+            for i in range(0,len(outsequences)):
+                outsequences[i]=outsequences[i]+z
+        elif z in alternative:
+            for i in outsequences:
+                for y in code[z]:
+                    tempsequences.append(i+y)
+            outsequences=tempsequences.copy()
+            tempsequences=[]
+    #print (outsequences)
+    workbook = xlsxwriter.Workbook('sequences.xlsx')
+    # workbook = xlsxwriter.Workbook('Segment_4_2017_all_renamed_final.xlsx') ORIGINAL
+    worksheet = workbook.add_worksheet()
+    row = 0
+    col = 0
+
+    #for i in outsequences:
+    worksheet.write(row,col,seq)
+    worksheet.write_column(row+1,col,outsequences)
+    workbook.close() 
+
+sequenceDecoder('AKTMK')           
+
+    
+
+
