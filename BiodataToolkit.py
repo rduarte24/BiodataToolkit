@@ -58,10 +58,12 @@ def createNewName(country,sequence,segment,counter):
     return newName
 
 
-def parser(filename,fileformat,outFile):
+def parser(filename,outFile):
     start = time.time()
+    init = False
+    globalcount = 0
     #We read the sequence genbank file
-    for seq_record in SeqIO.parse("segment4_2017_all.gb", "genbank"):
+    for seq_record in SeqIO.parse(filename, "genbank"):
         
         fullFastas['Complete Fasta'].append(seq_record.format('fasta'))
         
@@ -116,12 +118,18 @@ def parser(filename,fileformat,outFile):
                                     dataSet.data[y].append(feature.qualifiers[y][0])
                                 else:
                                     dataSet.data[y].append('empty')
-        #We pull the country for the rename process
-        tempCountry=dataSet.data['country'][-1]
-        if ':' in tempCountry:
-            tempCountry=tempCountry[0:tempCountry.index(':')]
-        #We pull the segment for the rename process
-        tempSegment=dataSet.data['segment'][-1]
+        #We pull the country for the rename process if the sequence has the country feature
+        if 'country' in dataSet.data.keys():
+            tempCountry=dataSet.data['country'][-1]
+            if ':' in tempCountry:
+                tempCountry=tempCountry[0:tempCountry.index(':')]
+        else:
+            tempCountry = 'NA'
+        #We pull the segment for the rename process if the sequence has the segment feature
+        if 'segment' in dataSet.data.keys():
+            tempSegment=dataSet.data['segment'][-1]
+        else:
+            tempSegment = 'NA'
         #We rename the sequence according to GCL nomenclature
         nombre = createNewName(tempCountry,myseq,tempSegment,globalcount)
         #nombre = nombre +'\n' se implementa en la función new name
@@ -160,6 +168,7 @@ def parser(filename,fileformat,outFile):
 
     workbook.close()                            
 
+#parser("/Users/rduarte/Documents/Projects/GCL/Biodata Toolkit/S4-1999.gb","1999.xlsx")
                             
 
 

@@ -37,12 +37,18 @@ menuBar=tk.Menu(root)
 root.config(menu=menuBar)
 
 #Functions asociated to the next menu section
-def test_function():
+def call_parser():
+    try:
+        bdtk.parser(inputFile,outputFilename)
+    except:
+        tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
+        pass
     print('this is the test')
 
 def defOutName():
     global outputFilename
-    outputFilename=simpledialog.askstring('Digita el nombre del archivo de salida','Outputfilename')
+    outputFilename = simpledialog.askstring('Digita el nombre del archivo de salida','Outputfilename')
+    outputFilename = outputFilename + '.xlsx'
     print(outputFilename)
 
 def defOutRoute():
@@ -55,12 +61,12 @@ def abrirArchivo():
     global inputFile
     inputFile = filedialog.askopenfilename(title='Selecciona el archivo de entrada.',filetypes=[('GenBank file','*.gb')])
     print(inputFile)
-    defOutRoute()
+    #defOutRoute()
+    defOutName()
 
 # create a pulldown menu, and add it to the menu bar
 filemenu = tk.Menu(menuBar, tearoff=0)
 filemenu.add_command(label="Abrir", command=abrirArchivo)
-filemenu.add_command(label="Save")
 filemenu.add_separator()
 filemenu.add_command(label="Exit", command=root.quit)
 menuBar.add_cascade(label="File", menu=filemenu)
@@ -87,7 +93,7 @@ labelphoto = tk.Label(root,image=photo)
 labelphoto.pack()  
 
 #Run Button def
-btn = tk.Button(root, text='RUN',height=2, width=20, command=test_function)
+btn = tk.Button(root, text='RUN',height=2, width=20, command=call_parser)
 btn.pack()
 btn.place(x=200, y=310)
 
