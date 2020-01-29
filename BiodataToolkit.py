@@ -21,6 +21,8 @@ class DataSet:
             self.data[i]=[]
         self.initialized = True
 
+#Due the different types of sequence that we can get from the NCBI GenBank database,
+#We define an specific class to get all the codon sequences corresponding to the sequence.
 class Cdstype:
     
     #Contructor method
