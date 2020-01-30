@@ -1,3 +1,7 @@
+#Extra module for future work to calculate how many sequences can you get
+#from a coded consensus sequence
+
+
 import xlsxwriter
 
 #Main Function
