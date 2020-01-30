@@ -43,7 +43,8 @@ def call_parser():
     except:
         tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
         pass
-    print('this is the test')
+    #Debug line
+    #print('this is the test')
 
 def defOutName():
     global outputFilename
