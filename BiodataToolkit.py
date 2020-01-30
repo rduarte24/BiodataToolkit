@@ -169,7 +169,7 @@ def parser(filename,outFile):
             col += 1
 
     workbook.close()
-    print ("Runtime: "+str(int(end-start)))                            
+    print ('Runtime: '+str(int(end-start))+'Seconds')                            
 
 #parser("/Users/rduarte/Documents/Projects/GCL/Biodata Toolkit/S4-1999.gb","1999.xlsx")
                             
