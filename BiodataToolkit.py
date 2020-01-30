@@ -168,7 +168,8 @@ def parser(filename,outFile):
             worksheet.write_column(row+1,col,dicc[head])
             col += 1
 
-    workbook.close()                            
+    workbook.close()
+    print (start-end)                            
 
 #parser("/Users/rduarte/Documents/Projects/GCL/Biodata Toolkit/S4-1999.gb","1999.xlsx")
                             
