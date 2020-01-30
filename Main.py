@@ -71,13 +71,15 @@ filemenu.add_separator()
 filemenu.add_command(label="Exit", command=root.quit)
 menuBar.add_cascade(label="File", menu=filemenu)
 
+#Aditional module for future work
+
 #Functions asociated to the next menu section
 # Menu Definition
-decodermenu = tk.Menu(menuBar, tearoff=0)
-decodermenu.add_command(label="Cargar sequencia")
-decodermenu.add_command(label="Cargar archivo de secuencias")
+#decodermenu = tk.Menu(menuBar, tearoff=0)
+#decodermenu.add_command(label="Cargar sequencia")
+#decodermenu.add_command(label="Cargar archivo de secuencias")
 #editmenu.add_command(label="Paste")
-menuBar.add_cascade(label="Sequence Decoder", menu=decodermenu)
+#menuBar.add_cascade(label="Sequence Decoder", menu=decodermenu)
 
 #Functions asociated to the next menu section
 def about_us():
