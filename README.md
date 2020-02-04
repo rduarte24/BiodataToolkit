@@ -3,6 +3,9 @@
 BioDataToolkit it's a bioinformatic tool to clasify DNA and protein sequences from the GenBank at NCBI. To run this tool you need to download the package and run Main.py file.
 
 #### Requirements
+Note: We hardly recommend to install package manager pip, please clic the link below for more information about
+https://programminghistorian.org/es/lecciones/instalar-modulos-python-pip
+
 These are the required packages for BioDataToolkit to run. The command lines to install the packages are bellow each package.
 * [Python 3](https://www.python.org/downloads/) - Programming language to compile. Make sure to install tkinter library, otherwise GUI is not going to work.
 For Unix/Linux/MacOSX based systems
