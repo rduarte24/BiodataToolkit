@@ -61,7 +61,7 @@ import BiodataToolkit as bdtk
 ```
 Then you can call the parser method.
 ```python
-parser(inputFilename,outputFilename)
+bdtk.parser(inputFilename,outputFilename)
 ```
 Passing the input file name full route as inputFilename parameter and the output file name as outputFilename parameter, then the output file will be in the same directory as the Biodatatoolkit.py file.
 
