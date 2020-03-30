@@ -38,8 +38,11 @@ root.config(menu=menuBar)
 
 #Functions asociated to the next menu section
 def call_parser():
+    if c1 == c2:
+        tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
+        pass
     try:
-        bdtk.parser(inputFile,outputFilename)
+        bdtk.parser(inputFile,outputFilename,c1,c2)
     except:
         tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
         pass
@@ -100,6 +103,17 @@ btn = tk.Button(root, text='RUN',height=2, width=20, command=call_parser)
 btn.pack()
 btn.place(x=200, y=310)
 
+#First one to check if you need the features of the sequences file
+c1 = int
+check1 = tk.Checkbutton(root, text='All Features (CDS + FASTAS)', variable = c1)
+check1.pack()
+check1.place(x=10, y=10)
+
+#Second if you need the Codon sequences
+c2 = int
+check2 = tk.Checkbutton(root, text='Basic Features and Complete Fastas', variable = c2)
+check2.pack()
+check2.place(x=260, y=10)
 
 
 root.mainloop()
