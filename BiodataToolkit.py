@@ -154,7 +154,6 @@ def parser(filename,outFile,c2):
         #Now we pack everything in a new excel table
 
         workbook = xlsxwriter.Workbook(outFile)
-        # workbook = xlsxwriter.Workbook('Segment_4_2017_all_renamed_final.xlsx') ORIGINAL
         worksheet = workbook.add_worksheet()
         #Input dicts
         inputList=[dataSet.data]
@@ -162,7 +161,6 @@ def parser(filename,outFile,c2):
             inputList.append(i.data)
         inputList.append(fullFastas)
         inputList.append(renamedFastas)
-        #print (inputList)
 
         row = 0
         col = 0
@@ -197,12 +195,6 @@ def parser(filename,outFile,c2):
                         dataSet=DataSet(feature.qualifiers.keys())
                     #Verify the type of the feature for Codon Sequences
                     if feature.type == "CDS":
-                        ##try:
-                        ##    cds=Cdstype(feature.qualifiers['gene'][0],feature.qualifiers.keys())
-                        ##    cdsList.append(cds)
-                        ##except:
-                        ##    cds=Cdstype(feature.qualifiers['product'][0],feature.qualifiers.keys())
-                        ##    cdsList.append(cds)
                         pass
                 #Initialization Validation
                 init = True
@@ -212,31 +204,7 @@ def parser(filename,outFile,c2):
                 
                 if feature.type == "CDS":
                     pass
-                    ############################################################################
-                    #for item in cdsList:
-                    #    try:
-                    #        if item.type == feature.qualifiers['gene'][0]:
-                    #            for y in feature.qualifiers.keys():
-                    #                if y in item.data.keys():
-                    #                    item.data[y].append(feature.qualifiers[y][0])
-                    #            #We save the location of the codon Sequence        
-                    #            item.data['CDS'].append(str(feature.location))
-                    #            #We pull out the sequence as string to join the string with the new
-                    #            myseq2 = str(feature.location.extract(seq_record.seq))
-                    #            #We pull out the sequence in fasta format to keep the original name
-                    #            myseq=feature.location.extract(seq_record).format('fasta')
-                    #            #We save the original fasta format sequence
-                    #            item.data['Fasta'].append(myseq)
-                    #            #We trimm the sequence for the creation of the new name
-                    #            myseq=myseq[0:myseq.index('\n')]
-                    #    except:
-                    #        try:
-                    #            item.data['CDS'].append('empty')
-                    #            item.data['Fasta'].append('empty')
-                    #        except:
-                    #            print('Fatal Error')
-                    #            continue
-                    ###############################################################################
+                    
                 if feature.type =='source':
                                 for y in dataSet.data.keys():
                                     if y in feature.qualifiers.keys():
@@ -258,7 +226,6 @@ def parser(filename,outFile,c2):
             #We rename the sequence according to GCL nomenclature
             nombre = createNewName(tempCountry,myseq,tempSegment,globalcount)
             #nombre = nombre +'\n' se implementa en la función new name
-            #print ('new name :',nombre)
             fasta_format_string = nombre + myseq2
             renamedFastas['Renamed Fastas'].append(fasta_format_string)
             globalcount = globalcount+1
@@ -271,12 +238,9 @@ def parser(filename,outFile,c2):
         #Now we pack everything in a new excel table
 
         workbook = xlsxwriter.Workbook(outFile)
-        # workbook = xlsxwriter.Workbook('Segment_4_2017_all_renamed_final.xlsx') ORIGINAL
         worksheet = workbook.add_worksheet()
         #Input dicts
         inputList=[dataSet.data]
-        #for i in cdsList:
-        #    inputList.append(i.data)
         inputList.append(fullFastas)
         inputList.append(renamedFastas)
         #print (inputList)
@@ -294,10 +258,5 @@ def parser(filename,outFile,c2):
         workbook.close()
         end = time.time()
         print ('Runtime: '+str(int(end-start))+' Seconds')
-
-
-#parser("/Users/rduarte/Documents/Projects/GCL/Biodata Toolkit/S4-1999.gb","1999.xlsx")
-                            
-parser("/Users/rubenduarte/Desktop/query.gb","out.xlsx",1)
 
     
