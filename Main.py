@@ -39,12 +39,19 @@ root.config(menu=menuBar)
 #Functions asociated to the next menu section
 def call_parser():
     try:
-        bdtk.parser(inputFile,outputFilename)
+        bdtk.parser(inputFile,outputFilename,0)
     except:
         tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
         pass
     #Debug line
     #print('this is the test')
+
+def call_parser_basic():
+    try:
+        bdtk.parser(inputFile,outputFilename,1)
+    except:
+        tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
+        pass
 
 def defOutName():
     global outputFilename
@@ -98,8 +105,17 @@ labelphoto.pack()
 #Run Button def
 btn = tk.Button(root, text='RUN',height=2, width=20, command=call_parser)
 btn.pack()
-btn.place(x=200, y=310)
+btn.place(x=100, y=310)
 
+btn2 = tk.Button(root, text='RUN (Basic Mode)',height=2, width=20, command=call_parser_basic)
+btn2.pack()
+btn2.place(x=300, y=310)
+
+#Basic features and Complete Fastas Mode
+#c2 = 0
+#check2 = tk.Checkbutton(root, text='Basic Features and Complete Fastas Mode', variable = c2)
+#check2.pack()
+#check2.place(x=260, y=10)
 
 
 root.mainloop()
