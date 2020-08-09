@@ -60,14 +60,16 @@ def createNewName(country,sequence,segment,counter):
     return newName
 
 
-def parser(filename,outFile,c1,c2):
+def parser(filename,outFile,c2):
+    print('flag = ',c2)
+
     start = time.time()
     init = False
     globalcount = 0
     
     # First we define which run-mode are we going to use.
 
-    if c1 == 1:
+    if c2 != 1:
         #We read the sequence genbank file
         for seq_record in SeqIO.parse(filename, "genbank"):
 
@@ -182,6 +184,7 @@ def parser(filename,outFile,c1,c2):
         for seq_record in SeqIO.parse(filename, "genbank"):
 
             fullFastas['Complete Fasta'].append(seq_record.format('fasta'))
+            myseq=(seq_record).format('fasta')
             myseq2 = str(seq_record.seq)
 
             #first we are going to initialize our data structures
@@ -295,6 +298,6 @@ def parser(filename,outFile,c1,c2):
 
 #parser("/Users/rduarte/Documents/Projects/GCL/Biodata Toolkit/S4-1999.gb","1999.xlsx")
                             
-
+parser("/Users/rubenduarte/Desktop/query.gb","out.xlsx",1)
 
     

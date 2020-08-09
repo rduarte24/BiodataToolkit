@@ -38,16 +38,20 @@ root.config(menu=menuBar)
 
 #Functions asociated to the next menu section
 def call_parser():
-    if c1 == c2:
-        tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
-        pass
     try:
-        bdtk.parser(inputFile,outputFilename,c1,c2)
+        bdtk.parser(inputFile,outputFilename,0)
     except:
         tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
         pass
     #Debug line
     #print('this is the test')
+
+def call_parser_basic():
+    try:
+        bdtk.parser(inputFile,outputFilename,1)
+    except:
+        tkinter.messagebox.showinfo('BiodataToolkit','Error en los parámetros de entrada')
+        pass
 
 def defOutName():
     global outputFilename
@@ -101,19 +105,17 @@ labelphoto.pack()
 #Run Button def
 btn = tk.Button(root, text='RUN',height=2, width=20, command=call_parser)
 btn.pack()
-btn.place(x=200, y=310)
+btn.place(x=100, y=310)
 
-#First one to check if you need the features of the sequences file
-c1 = int
-check1 = tk.Checkbutton(root, text='All Features (CDS + FASTAS)', variable = c1)
-check1.pack()
-check1.place(x=10, y=10)
+btn2 = tk.Button(root, text='RUN (Basic Mode)',height=2, width=20, command=call_parser_basic)
+btn2.pack()
+btn2.place(x=300, y=310)
 
-#Second if you need the Codon sequences
-c2 = int
-check2 = tk.Checkbutton(root, text='Basic Features and Complete Fastas', variable = c2)
-check2.pack()
-check2.place(x=260, y=10)
+#Basic features and Complete Fastas Mode
+#c2 = 0
+#check2 = tk.Checkbutton(root, text='Basic Features and Complete Fastas Mode', variable = c2)
+#check2.pack()
+#check2.place(x=260, y=10)
 
 
 root.mainloop()
